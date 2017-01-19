@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ChatList from './ChatList';
 import ChatBox from './ChatBox';
+import TextBox from './TextBox';
 import './App.css';
 
 const styles = {
@@ -51,6 +52,7 @@ class App extends Component {
       <div style={styles}>
         <ChatList chats={chatListMock} />
         <ChatBox name={chatListMock[0].name} messages={chatListMock[0].messages} />
+        <TextBox />
       </div>
     );
   }
