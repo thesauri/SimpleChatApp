@@ -5,6 +5,10 @@ const styles = {
   display: "flex"
 };
 
+const addChatStyles = {
+  marginLeft: "auto"
+};
+
 class ChatList extends Component {
   render() {
     const chatListItems = this.props.chats.map((chat) =>
@@ -13,6 +17,7 @@ class ChatList extends Component {
     return (
       <div style={styles}>
         {chatListItems}
+        <a style={addChatStyles} href="#">+</a>
       </div>
     );
   }
