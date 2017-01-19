@@ -6,6 +6,7 @@ import App from './App';
 const Routes = (props) => (
   <Router {...props}>
     <Route path="/" component={App} />
+    <Route path="/:chatId" component={App} />
   </Router>
 );
 

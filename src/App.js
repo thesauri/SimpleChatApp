@@ -47,11 +47,15 @@ const chatListMock = [
 ];
 
 class App extends Component {
+
   render() {
+    const chatId = typeof(this.props.params.chatId) !== "undefined" ? this.props.params.chatId : 0;
     return (
       <div style={styles}>
         <ChatList chats={chatListMock} />
-        <ChatBox name={chatListMock[0].name} messages={chatListMock[0].messages} />
+        <ChatBox
+          name={chatListMock[chatId].name}
+          messages={chatListMock[chatId].messages} />
         <TextBox />
       </div>
     );
