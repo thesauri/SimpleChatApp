@@ -15,6 +15,7 @@ const styles = {
 
 const chatListMock = [
   {
+    chatId: 0,
     name: "Chat 1",
     messages: [
       {
@@ -30,6 +31,7 @@ const chatListMock = [
     ]
   },
   {
+    chatId: 1,
     name: "Chat 2",
     messages: [
       {

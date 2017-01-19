@@ -8,7 +8,7 @@ const styles = {
 class ChatList extends Component {
   render() {
     const chatListItems = this.props.chats.map((chat) =>
-      <ChatListItem key={chat.name} name={chat.name} />
+      <ChatListItem key={chat.name} name={chat.name} chatId={chat.chatId} />
     );
     return (
       <div style={styles}>
