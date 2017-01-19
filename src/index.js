@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
+import Routes from './Routes';
+import { browserHistory } from 'react-router';
 import './index.css';
 
 const styles = {
@@ -9,6 +11,6 @@ const styles = {
 }
 
 ReactDOM.render(
-  <App style={styles} />,
+  <Routes history={browserHistory} />,
   document.getElementById('root')
 );
