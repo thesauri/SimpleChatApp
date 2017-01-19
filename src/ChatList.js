@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
+import ChatListItem from './ChatListItem'
 
 class ChatList extends Component {
   render() {
     return (
-      <div>Chats will appear here</div>
+      <ChatListItem />
     );
   }
 }
