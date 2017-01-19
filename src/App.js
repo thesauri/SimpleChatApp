@@ -3,6 +3,15 @@ import ChatList from './ChatList';
 import ChatBox from './ChatBox';
 import './App.css';
 
+const styles = {
+  maxWidth: 768,
+  margin: "0 auto",
+  padding: 20,
+  display: "flex",
+  flex: 1,
+  flexDirection: "column"
+};
+
 const chatListMock = [
   {
     name: "Chat 1",
@@ -39,7 +48,7 @@ const chatListMock = [
 class App extends Component {
   render() {
     return (
-      <div>
+      <div style={styles}>
         <ChatList chats={chatListMock} />
         <ChatBox name={chatListMock[0].name} messages={chatListMock[0].messages} />
       </div>

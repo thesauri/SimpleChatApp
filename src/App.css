@@ -1,0 +1,10 @@
+/* These elements are specified in HTML files, thus the styling is done here
+   and not in the React components */
+body, html {
+  height: 100%;
+}
+
+#root {
+  display: flex;
+  height: 100%;
+}
