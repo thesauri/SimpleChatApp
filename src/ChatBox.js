@@ -9,4 +9,9 @@ class ChatBox extends Component {
   }
 }
 
+ChatBox.propTypes = {
+  name: React.PropTypes.string.isRequired,
+  messages: React.PropTypes.array.isRequired
+};
+
 export default ChatBox;

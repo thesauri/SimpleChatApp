@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import ChatList from './ChatList'
+import ChatList from './ChatList';
+import ChatBox from './ChatBox';
 import './App.css';
 
 const chatListMock = [
@@ -36,6 +37,7 @@ class App extends Component {
     return (
       <div>
         <ChatList chats={chatListMock} />
+        <ChatBox name={chatListMock[0].name} messages={chatListMock[0].messages} />
       </div>
     );
   }
