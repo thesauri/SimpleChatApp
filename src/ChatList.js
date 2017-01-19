@@ -11,6 +11,6 @@ class ChatList extends Component {
 
 ChatList.propTypes = {
   chats: React.PropTypes.array.isRequired
-}
+};
 
 export default ChatList;
