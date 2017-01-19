@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import Chats from './Chats'
+import ChatList from './ChatList'
 import './App.css';
 
 class App extends Component {
   render() {
     return (
       <div>
-        <Chats />
+        <ChatList />
       </div>
     );
   }
