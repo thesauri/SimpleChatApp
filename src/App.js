@@ -8,10 +8,12 @@ const chatListMock = [
     name: "Chat 1",
     messages: [
       {
+        id: 0,
         user: "Bob",
         message: "Hello Pete!"
       },
       {
+        id: 1,
         user: "Pete",
         message: "Hello Bob"
       }
@@ -21,10 +23,12 @@ const chatListMock = [
     name: "Chat 2",
     messages: [
       {
+        id: 2,
         user: "You",
         message: "Are thou smiling?"
       },
       {
+        id: 3,
         user: "Mona Lisa",
         message: "😏"
       }
