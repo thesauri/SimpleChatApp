@@ -3,7 +3,9 @@ import ChatListItem from './ChatListItem'
 
 class ChatList extends Component {
   render() {
-    const chatListItems = this.props.chats.map((chat) => <ChatListItem name={chat.name} />);
+    const chatListItems = this.props.chats.map((chat) =>
+      <ChatListItem key={chat.name} name={chat.name} />
+    );
     return (
       <div>
         {chatListItems}
