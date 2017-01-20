@@ -3,7 +3,8 @@ import ChatBoxBubble from './ChatBoxBubble';
 
 const styles = {
   display: "flex",
-  flexDirection: "column-reverse",
+  flexDirection: "column",
+  justifyContent: "flex-end",
   flex: 1
 };
 
