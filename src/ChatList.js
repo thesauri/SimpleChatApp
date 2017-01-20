@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import ChatListItem from './ChatListItem';
-import { Link } from 'react-router'
 
 const styles = {
   display: "flex"
@@ -11,6 +10,25 @@ const addChatStyles = {
 };
 
 class ChatList extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      showChatNameInput: false
+    };
+  }
+
+  showChatNameInput() {
+    this.setState({
+      showChatNameInput: true
+    });
+  }
+
+  hideChatNameInput() {
+    this.setState({
+      showChatNameInput: false
+    });
+  }
+
   render() {
     const chatListItems = this.props.chats.map((chat) =>
       <ChatListItem key={chat.name} name={chat.name} chatId={chat.chatId} />
@@ -18,17 +36,19 @@ class ChatList extends Component {
     return (
       <div style={styles}>
         {chatListItems}
-        { this.props.newChat && <input type="text" autoFocus placeholder="Enter chat name" /> }
-        <Link style={addChatStyles} to={`/${this.props.currentChat}/new`}>+</Link>
+        {
+          this.state.showChatNameInput &&
+          <input type="text" placeholder="Enter chat name"
+            onBlur={() => this.hideChatNameInput()} autoFocus />
+        }
+        <a style={addChatStyles} href="#" onClick={() => this.showChatNameInput()}>+</a>
       </div>
     );
   }
 }
 
 ChatList.propTypes = {
-  currentChat: React.PropTypes.number.isRequired,
-  chats: React.PropTypes.array.isRequired,
-  newChat: React.PropTypes.bool.isRequired
+  chats: React.PropTypes.array.isRequired
 };
 
 export default ChatList;
