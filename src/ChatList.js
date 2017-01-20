@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import ChatListItem from './ChatListItem'
+import ChatListItem from './ChatListItem';
+import { Link } from 'react-router'
 
 const styles = {
   display: "flex"
@@ -17,14 +18,17 @@ class ChatList extends Component {
     return (
       <div style={styles}>
         {chatListItems}
-        <a style={addChatStyles} href="#">+</a>
+        { this.props.newChat && <input type="text" autoFocus placeholder="Enter chat name" /> }
+        <Link style={addChatStyles} to={`/${this.props.currentChat}/new`}>+</Link>
       </div>
     );
   }
 }
 
 ChatList.propTypes = {
-  chats: React.PropTypes.array.isRequired
+  currentChat: React.PropTypes.number.isRequired,
+  chats: React.PropTypes.array.isRequired,
+  newChat: React.PropTypes.bool.isRequired
 };
 
 export default ChatList;
