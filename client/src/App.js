@@ -13,54 +13,43 @@ const styles = {
   flexDirection: "column"
 };
 
-const chatListMock = [
-  {
-    chatId: 0,
-    name: "Chat 1",
-    messages: [
-      {
-        id: 0,
-        user: "Bob",
-        message: "Hello Pete!"
-      },
-      {
-        id: 1,
-        user: "Pete",
-        message: "Hello Bob"
-      }
-    ]
-  },
-  {
-    chatId: 1,
-    name: "Chat 2",
-    messages: [
-      {
-        id: 2,
-        user: "You",
-        message: "Are thou smiling?"
-      },
-      {
-        id: 3,
-        user: "Mona Lisa",
-        message: "😏"
-      }
-    ]
-  }
-];
-
 class App extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = { connected: false };
+  }
+
+  componentDidMount() {
+    this.ws = new WebSocket("ws://localhost:8080");
+    this.ws.onmessage = (e) => {
+      const data = JSON.parse(e.data);
+      this.setState({
+        connected: true,
+        chats: data
+      });
+    };
+  }
+
+  componentWillUnmount() {
+    this.ws.close();
+  }
 
   render() {
     const chatId = typeof(this.props.params.chatId) !== "undefined" ? parseInt(this.props.params.chatId, 10) : 0;
-    return (
-      <div style={styles}>
-        <ChatList chats={chatListMock} />
-        <ChatBox
-          name={chatListMock[chatId].name}
-          messages={chatListMock[chatId].messages} />
-        <TextBox />
-      </div>
-    );
+    if (this.state.connected) {
+      return (
+        <div style={styles}>
+          <ChatList chats={this.state.chats} />
+          <ChatBox
+            name={this.state.chats[chatId].name}
+            messages={this.state.chats[chatId].messages} />
+          <TextBox />
+        </div>
+      );
+    } else {
+      return (<div style={styles}></div>);
+    }
   }
 }
 
