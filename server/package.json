@@ -12,5 +12,8 @@
     "websocket"
   ],
   "author": "Walter Berggren",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "ws": "^1.1.1"
+  }
 }
