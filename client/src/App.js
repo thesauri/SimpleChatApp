@@ -23,11 +23,14 @@ class App extends Component {
   componentDidMount() {
     this.ws = new WebSocket("ws://localhost:8080");
     this.ws.onmessage = (e) => {
-      const data = JSON.parse(e.data);
-      this.setState({
-        connected: true,
-        chats: data
-      });
+      const msg = JSON.parse(e.data);
+
+      if (msg.type === "initial") {
+        this.setState({
+          connected: true,
+          chats: msg.data
+        });
+      }
     };
   }
 

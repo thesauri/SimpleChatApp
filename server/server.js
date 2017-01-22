@@ -42,5 +42,9 @@ const chatData = [
 
 wss.on("connection", (ws) => {
   console.log("Connection!");
-  ws.send(JSON.stringify(chatData));
+  const msg = {
+    type: "initial",
+    data: chatData
+  };
+  ws.send(JSON.stringify(msg));
 });
