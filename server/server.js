@@ -5,6 +5,7 @@ const wss = new WebSocket.Server({
   port: 8080
 });
 
+// The chatId property could probably be replace with the chat's index
 const chatData = [
   {
     chatId: 0,
@@ -40,8 +41,27 @@ const chatData = [
   }
 ];
 
+/* Attempts to add a message to the chat data
+   Returns whether the message was added or not */
+function addMessage(chatId, user, message) {
+  if (typeof(chatData[chatId]) === "object") {
+    const messageCount = chatData[chatId].messages.length;
+    chatData[chatId].messages.push({
+      id: messageCount + 1,
+      user: user,
+      message: message
+    });
+  }
+}
+
 wss.on("connection", (ws) => {
-  console.log("Connection!");
+  ws.on("message", (msg) => {
+    const msgObj = JSON.parse(msg);
+    if (msgObj.type === "newMessage") {
+      addMessage(msgObj.chatId, msgObj.nickname, msgObj.text);
+    }
+  });
+
   const msg = {
     type: "initial",
     data: chatData
