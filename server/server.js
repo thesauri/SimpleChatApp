@@ -54,6 +54,14 @@ function addMessage(chatId, user, message) {
   }
 }
 
+wss.broadcast = (data) => {
+  wss.clients.forEach((client) => {
+    if (client.readyState === WebSocket.OPEN) {
+      client.send(data);
+    }
+  });
+}
+
 wss.on("connection", (ws) => {
   ws.on("message", (msg) => {
     const msgObj = JSON.parse(msg);
