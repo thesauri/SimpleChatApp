@@ -25,34 +25,36 @@ class App extends Component {
 
   componentDidMount() {
     this.ws = new WebSocket("ws://localhost:8080");
-    this.ws.onmessage = (e) => {
-      const msg = JSON.parse(e.data);
+    this.ws.onmessage = (e) => this.handleWebSocketMessage(e);
+  }
 
-      switch (msg.type) {
-        case "initial":
-          this.setState({
-            connected: true,
-            chats: msg.data
-          });
-          break;
+  handleWebSocketMessage(e) {
+    const msg = JSON.parse(e.data);
 
-        case "newMessage":
-          const messageCount = this.state.chats[msg.chatId].messages.length;
-          const newChats = this.state.chats;
-          newChats[msg.chatId].messages.push({
-            id: messageCount + 1,
-            user: msg.nickname,
-            message: msg.text
-          });
-          this.setState({
-            chats: newChats
-          });
-          break;
+    switch (msg.type) {
+      case "initial":
+        this.setState({
+          connected: true,
+          chats: msg.data
+        });
+        break;
 
-        default:
-          console.error("Unknown message type: " + msg.type);
-      }
-    };
+      case "newMessage":
+        const messageCount = this.state.chats[msg.chatId].messages.length;
+        const newChats = this.state.chats;
+        newChats[msg.chatId].messages.push({
+          id: messageCount + 1,
+          user: msg.nickname,
+          message: msg.text
+        });
+        this.setState({
+          chats: newChats
+        });
+        break;
+
+      default:
+        console.error("Unknown message type: " + msg.type);
+    }
   }
 
   /* Returns the ID of the current chat. If a chat is defined in the URL (e.g. /1)
