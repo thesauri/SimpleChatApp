@@ -19,7 +19,7 @@ class App extends Component {
     super(props);
     this.state = {
       connected: false,
-      nickname: "User"
+      user: "User"
     };
   }
 
@@ -44,7 +44,7 @@ class App extends Component {
         const newChats = this.state.chats;
         newChats[msg.chatId].messages.push({
           id: messageCount + 1,
-          user: msg.nickname,
+          user: msg.user,
           message: msg.text
         });
         this.setState({
@@ -69,7 +69,7 @@ class App extends Component {
     const msg = {
       type: "newMessage",
       chatId: this.chatId(),
-      nickname: this.state.nickname,
+      user: this.state.user,
       text: text
     };
     this.ws.send(JSON.stringify(msg));
