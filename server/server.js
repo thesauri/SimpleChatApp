@@ -67,6 +67,8 @@ wss.on("connection", (ws) => {
     const msgObj = JSON.parse(msg);
     if (msgObj.type === "newMessage") {
       addMessage(msgObj.chatId, msgObj.nickname, msgObj.text);
+      // Send the new message to all connected clients
+      wss.broadcast(msgObj);
     }
   });
 
