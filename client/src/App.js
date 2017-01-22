@@ -52,10 +52,6 @@ class App extends Component {
         default:
           console.error("Unknown message type: " + msg.type);
       }
-
-      if (msg.type === "initial") {
-
-      }
     };
   }
 
