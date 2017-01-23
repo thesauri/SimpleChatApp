@@ -1,58 +1,12 @@
 const WebSocket = require("ws");
+const ChatModel = require("./models/ChatModel");
 
 const wss = new WebSocket.Server({
   perMessageDeflate: false,
   port: 8080
 });
 
-// The chatId property could probably be replace with the chat's index
-const chatData = [
-  {
-    chatId: 0,
-    name: "Chat 1",
-    messages: [
-      {
-        id: 0,
-        user: "Bob",
-        message: "Hello Pete!"
-      },
-      {
-        id: 1,
-        user: "Pete",
-        message: "Hello Bob"
-      }
-    ]
-  },
-  {
-    chatId: 1,
-    name: "Chat 2",
-    messages: [
-      {
-        id: 2,
-        user: "You",
-        message: "Are thou smiling?"
-      },
-      {
-        id: 3,
-        user: "Mona Lisa",
-        message: "😏"
-      }
-    ]
-  }
-];
-
-/* Attempts to add a message to the chat data
-   Returns whether the message was added or not */
-function addMessage(chatId, user, message) {
-  if (typeof(chatData[chatId]) === "object") {
-    const messageCount = chatData[chatId].messages.length;
-    chatData[chatId].messages.push({
-      id: messageCount + 1,
-      user: user,
-      message: message
-    });
-  }
-}
+const chat = new ChatModel();
 
 wss.broadcast = (data) => {
   wss.clients.forEach((client) => {
@@ -66,7 +20,7 @@ wss.on("connection", (ws) => {
   ws.on("message", (msg) => {
     const msgObj = JSON.parse(msg);
     if (msgObj.type === "newMessage") {
-      addMessage(msgObj.chatId, msgObj.user, msgObj.text);
+      chat.addMessage(msgObj.chatId, msgObj.user, msgObj.text);
       // Send the new message to all connected clients
       wss.broadcast(msg);
     }
@@ -74,7 +28,7 @@ wss.on("connection", (ws) => {
 
   const msg = {
     type: "initial",
-    data: chatData
+    data: chat.chatData
   };
   ws.send(JSON.stringify(msg));
 });
