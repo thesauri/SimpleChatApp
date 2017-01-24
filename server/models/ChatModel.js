@@ -24,13 +24,14 @@ class ChatModel {
   }
 
   /* Attempts to add a message to the chat data
-     Returns whether the message was added or not */
+     Returns the new message property if it was created, otherwise null */
   addMessage(chatId, user, message) {
     if (typeof(this.chatData[chatId]) === "object") {
-      this.chatData[chatId].messages.push(new MessageModel(user, message));
-      return true;
+      const newMessage = new MessageModel(user, message);
+      this.chatData[chatId].messages.push(newMessage);
+      return newMessage;
     } else {
-      return false;
+      return null;
     }
   }
 

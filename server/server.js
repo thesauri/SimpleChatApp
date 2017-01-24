@@ -20,9 +20,19 @@ wss.on("connection", (ws) => {
   ws.on("message", (msg) => {
     const msgObj = JSON.parse(msg);
     if (msgObj.type === "newMessage") {
-      chat.addMessage(msgObj.chatId, msgObj.user, msgObj.text);
-      // Send the new message to all connected clients
-      wss.broadcast(msg);
+      const newMessage = chat.addMessage(msgObj.chatId, msgObj.user, msgObj.text);
+      if (newMessage !== null) {
+        const newMsg = {
+          type: "newMessage",
+          chatId: msgObj.chatId,
+          id: newMessage.id,
+          user: msgObj.user,
+          text: msgObj.text
+        };
+        wss.broadcast(JSON.stringify(newMsg));
+      } else {
+        console.error("Unable to add message: " + msg);
+      }
     }
   });
 

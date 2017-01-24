@@ -40,10 +40,9 @@ class App extends Component {
         break;
 
       case "newMessage":
-        const messageCount = this.state.chats[msg.chatId].messages.length;
         const newChats = this.state.chats;
         newChats[msg.chatId].messages.push({
-          id: messageCount + 1,
+          id: msg.id,
           user: msg.user,
           message: msg.text
         });
