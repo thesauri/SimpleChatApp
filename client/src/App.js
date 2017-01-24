@@ -74,6 +74,15 @@ class App extends Component {
     this.ws.send(JSON.stringify(msg));
   }
 
+  // Requests the server to create a new group with the desired name
+  createChatGroup(name) {
+    const msg = {
+      type: "newGroup",
+      name: name
+    };
+    this.ws.send(JSON.stringify(msg));
+  }
+
   componentWillUnmount() {
     this.ws.close();
   }
@@ -82,7 +91,7 @@ class App extends Component {
     if (this.state.connected) {
       return (
         <div style={styles}>
-          <ChatList chats={this.state.chats} />
+          <ChatList chats={this.state.chats} onNewGroup={(name) => this.createChatGroup(name)}/>
           <ChatBox
             name={this.state.chats[this.chatId()].name}
             messages={this.state.chats[this.chatId()].messages} />

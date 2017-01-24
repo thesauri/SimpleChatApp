@@ -23,7 +23,10 @@ class ChatList extends Component {
     });
   }
 
-  hideChatNameInput() {
+  hideChatNameInput(e) {
+    if (e.target.value !== "") {
+      this.props.onNewGroup(e.target.value);
+    }
     this.setState({
       showChatNameInput: false
     });
@@ -39,7 +42,7 @@ class ChatList extends Component {
         {
           this.state.showChatNameInput &&
           <input type="text" placeholder="Enter chat name"
-            onBlur={() => this.hideChatNameInput()} autoFocus />
+            onBlur={(e) => this.hideChatNameInput(e)} autoFocus />
         }
         <a style={addChatStyles} href="#" onClick={() => this.showChatNameInput()}>+</a>
       </div>
@@ -48,6 +51,7 @@ class ChatList extends Component {
 }
 
 ChatList.propTypes = {
+  onNewGroup: React.PropTypes.func.isRequired,
   chats: React.PropTypes.array.isRequired
 };
 
