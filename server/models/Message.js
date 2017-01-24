@@ -1,6 +1,6 @@
 let messageCount = 0;
 
-class MessageModel {
+class Message {
   constructor(user, message) {
     this.id = messageCount + 1;
     this.user = user;
@@ -9,4 +9,4 @@ class MessageModel {
   }
 }
 
-module.exports = MessageModel;
+module.exports = Message;

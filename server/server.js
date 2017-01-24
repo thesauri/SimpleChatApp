@@ -1,12 +1,12 @@
 const WebSocket = require("ws");
-const ChatModel = require("./models/ChatModel");
+const Chat = require("./models/Chat");
 
 const wss = new WebSocket.Server({
   perMessageDeflate: false,
   port: 8080
 });
 
-const chat = new ChatModel();
+const chat = new Chat();
 
 wss.broadcast = (data) => {
   wss.clients.forEach((client) => {
