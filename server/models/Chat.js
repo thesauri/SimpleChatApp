@@ -34,8 +34,6 @@ class Chat {
       return null;
     }
   }
-
-
 }
 
 module.exports = Chat;
